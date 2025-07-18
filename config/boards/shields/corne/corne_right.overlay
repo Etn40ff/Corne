@@ -230,7 +230,7 @@
 	// transmissions and instead use GPIO bit-banging.
 	//
 	// When the driver switches to transmit mode, it frees up the SDA pin by
-    // switching the UART controller to unexposed/unused pins.
+        // switching the UART controller to unexposed/unused pins.
 	//
 	// Then it configures the GPIO controller to use the SCL and SDA pins
 	uart0_ps2_off: uart0_ps2_off {
@@ -241,44 +241,3 @@
 	};
 };
 
-&uart0 {
-        status = "disabled";
-        compatible = "nordic,nrf-uarte";
-
-        current-speed = MOUSE_PS2_UART_BAUD_RATE;
-        pinctrl-0 = <&uart0_ps2_default>;
-        pinctrl-1 = <&uart0_ps2_off>;
-
-        pinctrl-names = "default", "sleep";
-
-        uart_ps2: uart_ps2 {
-            status="disabled";
-            compatible = "uart-ps2";
-            scl-gpios = MOUSE_PS2_PIN_SCL_PRO_MICRO;
-            sda-gpios = MOUSE_PS2_PIN_SDA_PRO_MICRO;
-        };
-};
-/ {
-    mouse_ps2: mouse_ps2 {
-		status = "disabled";
-        compatible = "zmk,input-mouse-ps2";
-
-	    ps2-device = <&uart_ps2>;
-        rst-gpios = MOUSE_PS2_PIN_RST_PRO_MICRO;
-    };
-
-    mouse_ps2_input_listener: mouse_ps2_input_listener {
-        compatible = "zmk,input-listener-ps2";
-        status = "disabled";
-
-        device = <&mouse_ps2>;
-
-		// Some of the available settings depend on the keymap. So they
-		// are adjusted in...
-		// zmk-config/config/includes/mouse_tp.dtsi
-    };
-};
-
-zephyr_udc0: &usbd {
-    status = "okay";
-};
