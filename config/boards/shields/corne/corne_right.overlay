@@ -278,3 +278,7 @@
 		// zmk-config/config/includes/mouse_tp.dtsi
     };
 };
+
+zephyr_udc0: &usbd {
+    status = "okay";
+};
