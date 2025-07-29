@@ -34,6 +34,14 @@
         };
     };
 
+    behaviors {
+        mouse_wheel: mouse_wheel {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -50,7 +58,7 @@
                                                                                                              &mo LOWER                &kp LGUI                 &kp SPACE                     &kp RET                  &to MOUSE_KEYS           &mo UPPER
 //                                                                                                         ╰────────────────────────┴────────────────────────┴────────────────────────╯    ╰────────────────────────┴────────────────────────┴────────────────────────╯
             >;
-	    sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+	    sensor-bindings = <&mouse_wheel>;
         };
 
         Lower_layer {
