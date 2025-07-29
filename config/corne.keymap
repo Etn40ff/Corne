@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
+//#include <input/processors.dtsi>
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
@@ -15,6 +16,8 @@
 #define UPPER 2
 #define MOUSE_KEYS 3
 #define CONF 4
+
+// &msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };
 
 // Disable line-wrap in your editor to see a "visualization" of the key layouts
 / {
@@ -38,7 +41,8 @@
         mouse_wheel: mouse_wheel {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
+            bindings = <&kp UP>, <&kp DOWN>;
+            //bindings = <&msc SCRL_DOWN>, <&msc SCRL_UP>;
         };
     };
 
