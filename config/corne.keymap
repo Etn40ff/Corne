@@ -39,7 +39,7 @@
 
         combo_conflayer {
             timeout-ms = <50>;
-            key-positions = <0 11>;
+            key-positions = <17 29>;
             bindings = <&to CONF>;
         };
     };
