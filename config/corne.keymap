@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: MIT
  */
 
-#define ZMK_MOUSE_SCRL_VAL 140
-#define ZMK_POINTING_DEFAULT_MOVE_VAL 1200  // 600
+// Change mouse default parameters
+//#define ZMK_POINTING_DEFAULT_MOVE_VAL 1200  // 600
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 25   // 10
 
 //#include <input/processors.dtsi>
@@ -21,7 +21,16 @@
 #define MOUSE_KEYS 3
 #define CONF 4
 
-// &msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };
+// Double the speed of scrolling and tweak parameters
+/*
+&msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };
+
+&msc {
+    acceleration-exponent = <1>;      // 0
+    time-to-max-speed-ms = <100>;       // 300
+    delay-ms = <0>;                   // 0
+};
+*/
 
 // Disable line-wrap in your editor to see a "visualization" of the key layouts
 / {
@@ -33,19 +42,12 @@
             key-positions = <0 11>;
             bindings = <&to CONF>;
         };
-
-        combo_compose {
-            timeout-ms = <50>;
-            key-positions = <12 24>;
-            bindings = <&kp CAPS>;
-        };
     };
 
     behaviors {
         mouse_wheel: mouse_wheel {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            //bindings = <&kp UP>, <&kp DOWN>;
             bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
 	    tap-ms = <100>;
         };
@@ -60,7 +62,7 @@
 //     ╭────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────╮                                                      ╭────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────┬────────────────────────╮
          &kp TAB                  &kp Q                    &kp W                    &kp E                    &kp R                    &kp T                                                                           &kp Y                    &kp U                    &kp I                    &kp O                    &kp P                    &kp BSPC
 //     ├────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┤                                                      ├────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┤
-         &kp LCTRL                &kp A                    &kp S                    &kp D                    &kp F                    &kp G                                                                           &kp H                    &kp J                    &kp K                    &kp L                    &kp SEMI                 &kp SQT
+         &mt LCTRL CAPS           &kp A                    &kp S                    &kp D                    &kp F                    &kp G                                                                           &kp H                    &kp J                    &kp K                    &kp L                    &kp SEMI                 &kp SQT
 //     ├────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────╮    ╭────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┤
          &kp LSHFT                &kp Z                    &kp X                    &kp C                    &kp V                    &kp B                    &kp LALT                      &mkp MCLK                &kp N                    &kp M                    &kp COMMA                &kp DOT                  &kp SLASH                &kp ESC
 //     ╰────────────────────────┴────────────────────────┴────────────────────────┴────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┤    ├────────────────────────┼────────────────────────┼────────────────────────┼────────────────────────┴────────────────────────┴────────────────────────┴────────────────────────╯
